@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fake News Detection System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <script>
+        function remove() {
+            var div = document.getElementById("re");
+            div.parentNode.removeChild(div);
+        }
+    </script>
+
+</head>
+<body>
+<div class="login">
+    <h1>Fake News Detector</h1>
+
+    <form action="{{ url_for('predict')}}" method="POST">
+        <textarea name="message" rows="6" cols="50" required="required" onclick='remove()'></textarea>
+        <br>
+        <button type="submit" class="btn btn-primary">Predict</button>
+         
+        <h1>Result</h1>
+        <div class="results" id="re">
+            {% if prediction == ['Fake']%}
+            <h2 style="color:red;"> Looking Spam News </h2>
+            {% elif prediction == ['Real']%}
+            <h2 style="color:green;"> Looking Real News </h2>
+            {% endif %}
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>
